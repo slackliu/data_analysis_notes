@@ -2,31 +2,32 @@
 
 
 #### 1. Import the numpy package under the name `np` (★☆☆)
-
+引入Numpy并去名为np
 
 ```python
-
+import numpy as np
 ```
 
 #### 2. Print the numpy version and the configuration (★☆☆)
-
+打印出Numpy的版本跟信息
 
 ```python
-
+print(np.__version__)
+print(np.__config__)
 ```
 
 #### 3. Create a null vector of size 10 (★☆☆)
-
+创建一个长度为10的零向量
 
 ```python
-
+print(np.zeros(10))
 ```
 
 #### 4.  How to find the memory size of any array (★☆☆)
-
+获取数组所占内存大小
 
 ```python
-
+print(np.
 ```
 
 #### 5.  How to get the documentation of the numpy add function from the command line? (★☆☆)
