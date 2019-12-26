@@ -1,4 +1,5 @@
-# 来源于: <https://github.com/rougier/numpy-100>  
+# 来源于: <https://github.com/rougier/numpy-100>    
+https://blog.csdn.net/qq_39362996/article/details/90204737
 
 
 #### 1. Import the numpy package under the name `np` (★☆☆)
