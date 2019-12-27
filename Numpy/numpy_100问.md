@@ -28,191 +28,215 @@ print(np.zeros(10))
 获取数组所占内存大小
 
 ```python
-print(np.
+Z = np.zeros((10,10))
+print("%d bytes" % (Z.size * Z.itemsize))
 ```
 
 #### 5.  How to get the documentation of the numpy add function from the command line? (★☆☆)
-
+怎么用命令行获取numpy add函数的文档说明？
 
 ```python
-
+print(np.info(np.sum))
 ```
 
 #### 6.  Create a null vector of size 10 but the fifth value which is 1 (★☆☆)
-
+创建一个长度为10的零向量，并把第五个值赋值为1
 
 ```python
-
+z = np.zeros(10)
+z[4] = 1
+print(z)
 ```
 
 #### 7.  Create a vector with values ranging from 10 to 49 (★☆☆)
-
+创建一个值域为10到49的向量
 
 ```python
-
+z = np.arange(10, 50)
+print(z)
 ```
 
 #### 8.  Reverse a vector (first element becomes last) (★☆☆)
-
+将一个向量进行反转（第一个元素变为最后一个元素）
 
 ```python
-
+z = np.arange(10, 50)
+z = z[::-1]
+print(z)
 ```
 
 #### 9.  Create a 3x3 matrix with values ranging from 0 to 8 (★☆☆)
-
-
+创建一个3x3的矩阵，值域为0到8
 ```python
-
+z = np.arange(9)
+z = z.reshape(3, 3)
+print(z)
 ```
 
 #### 10. Find indices of non-zero elements from \[1,2,0,0,4,0\] (★☆☆)
-
-
+从数组[1, 2, 0, 0, 4, 0]中找出非0元素的位置索引
 ```python
-
+z = np.nonzero([1, 2, 0, 0, 4, 0])
+print(z)
 ```
 
 #### 11. Create a 3x3 identity matrix (★☆☆)
-
-
+创建一个3x3的单位矩阵
 ```python
-
+z = np.eye(3)
+print(z)
 ```
 
 #### 12. Create a 3x3x3 array with random values (★☆☆)
-
-
+创建一个3x3x3的随机数组
 ```python
-
+z = np.random.random((3, 3, 3))
+print(z)
 ```
 
 #### 13. Create a 10x10 array with random values and find the minimum and maximum values (★☆☆)
-
-
+创建一个10x10的随机数组，并找出该数组中的最大值与最小值
 ```python
-
+z = np.random.random((10, 10))
+print(z)
+print(z.max())
+print(z.min())
 ```
 
 #### 14. Create a random vector of size 30 and find the mean value (★☆☆)
-
-
+创建一个长度为30的随机向量，并求它的平均值
 ```python
-
+z = np.random.random(30)
+print(z)
+print(z.mean())
 ```
 
 #### 15. Create a 2d array with 1 on the border and 0 inside (★☆☆)
-
-
+创建一个2维数组，该数组边界值为1，内部的值为0 
 ```python
-
+Z = np.ones((10, 10))
+Z[1:-1, 1:-1] = 0
+print(Z)
 ```
 
 #### 16. How to add a border (filled with 0's) around an existing array? (★☆☆)
-
-
+如何用0来填充一个数组的边界？
 ```python
-
+Z = np.ones((10, 10))
+# Z[0, :] = 0
+# Z[-1, :] = 0
+# Z[:, 0] = 0
+# Z[:, -1] = 0
+Z[:, [0, -1]] = 0
+Z[[0, -1], :] = 0
+print(Z)
 ```
-
-#### 17. What is the result of the following expression? (★☆☆)
-
-
 ```python
-
+Z = np.ones((10, 10))
+Z = np.pad(Z, pad_width=1, mode='constant', constant_values=0)
+print(Z)
+```
+#### 17. What is the result of the following expression? (★☆☆)
+下面表达式运行的结果是什么？
+```python
+# 表达式                           # 结果
+0 * np.nan                        nan
+np.nan == np.nan                  False
+np.inf > np.nan                   False
+np.nan - np.nan                   nan
+0.3 == 3 * 0.1                    False
 ```
 
 #### 18. Create a 5x5 matrix with values 1,2,3,4 just below the diagonal (★☆☆)
-
-
+创建一个5x5的矩阵，且设置值1, 2, 3, 4在其对角线下面一行
 ```python
 
 ```
 
 #### 19. Create a 8x8 matrix and fill it with a checkerboard pattern (★☆☆)
-
+ 创建一个8x8的国际象棋棋盘矩阵（黑块为0，白块为1）
 
 ```python
 
 ```
 
 #### 20. Consider a (6,7,8) shape array, what is the index (x,y,z) of the 100th element?
-
+思考一下形状为(6, 7, 8)的数组的形状，且第100个元素的索引(x, y, z)分别是什么？
 
 ```python
 
 ```
 
 #### 21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)
-
+用tile函数创建一个8x8的棋盘矩阵
 
 
 
 #### 22. Normalize a 5x5 random matrix (★☆☆)
-
+对5x5的随机矩阵进行归一化
 
 ```python
 
 ```
 
 #### 23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
-
+创建一个dtype来表示颜色(RGBA)
 
 ```python
 
 ```
 
 #### 24. Multiply a 5x3 matrix by a 3x2 matrix (real matrix product) (★☆☆)
-
+一个5x3的矩阵和一个3x2的矩阵相乘，结果是什么？
 
 ```python
 
 ```
 
 #### 25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)
-
+给定一个一维数组把它索引从3到8的元素求相反数
 
 ```python
 
 ```
 
 #### 26. What is the output of the following script? (★☆☆)
-
+下面的脚本的结果是什么？
 
 ```python
 
 ```
 
 #### 27. Consider an integer vector Z, which of these expressions are legal? (★☆☆)
-
+关于整形的向量Z下面哪些表达式正确？
 
 ```python
 
 ```
 
 #### 28. What are the result of the following expressions?
-
+下面表达式的结果分别是什么？
 
 ```python
 
 ```
 
 #### 29. How to round away from zero a float array ? (★☆☆)
-
+如何从零位开始舍入浮点数组？ 
 
 ```python
 
 ```
 
 #### 30. How to find common values between two arrays? (★☆☆)
-
+如何找出两个数组公共的元素? 
 
 ```python
 
 ```
 
 #### 31. How to ignore all numpy warnings (not recommended)? (★☆☆)
-
+如何忽略numpy的警告信息（不推荐）?
 
 ```python
 
@@ -225,21 +249,21 @@ An equivalent way, with a context manager:
 ```
 
 #### 32. Is the following expressions true? (★☆☆)
-
+下面的表达式是否为真?
 
 ```python
 
 ```
 
 #### 33. How to get the dates of yesterday, today and tomorrow? (★☆☆)
-
+ 如何获得昨天，今天和明天的日期? 
 
 ```python
 
 ```
 
 #### 34. How to get all the dates corresponding to the month of July 2016? (★★☆)
-
+怎么获得所有与2016年7月的所有日期? 
 
 ```python
 
