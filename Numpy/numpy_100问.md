@@ -150,6 +150,8 @@ np.nan - np.nan                   nan
 #### 18. Create a 5x5 matrix with values 1,2,3,4 just below the diagonal (★☆☆)
 创建一个5x5的矩阵，且设置值1, 2, 3, 4在其对角线下面一行
 ```python
+z = np.diag([1,2,3,4],k=-2)
+print(z)
 
 ```
 
@@ -157,32 +159,49 @@ np.nan - np.nan                   nan
  创建一个8x8的国际象棋棋盘矩阵（黑块为0，白块为1）
 
 ```python
-
+Z = np.zeros((8, 8), dtype=int)
+Z[1::2, ::2] = 1
+# 这种是步长为2的
+Z[::2, 1::2] = 1
+print (Z)
 ```
 
 #### 20. Consider a (6,7,8) shape array, what is the index (x,y,z) of the 100th element?
 思考一下形状为(6, 7, 8)的数组的形状，且第100个元素的索引(x, y, z)分别是什么？
 
 ```python
-
+print (np.unravel_index(100, (6, 7, 8)))
 ```
+其过程类似：首先构造一个数组arr2=np.array(range(6*7*8)).reshape((6,7,8));返回indices中的元素值在数组arr2中对应值的索引位置。
 
 #### 21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)
 用tile函数创建一个8x8的棋盘矩阵
-
+'''python
+Z = np.tile(np.array([[1, 0], [0, 1]]), (4, 4))
+print (Z)
+'''
 
 
 #### 22. Normalize a 5x5 random matrix (★☆☆)
 对5x5的随机矩阵进行归一化
 
 ```python
-
+Z = np.random.random((5, 5))
+Zmax, Zmin = Z.max(), Z.min()
+Z = (Z-Zmin)/(Zmax-Zmin)
+print (Z)
 ```
 
 #### 23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
 创建一个dtype来表示颜色(RGBA)
 
 ```python
+color = np.dtype([("r", np.ubyte, 1),
+                  ("g", np.ubyte, 1),
+                  ("b", np.ubyte, 1),
+                  ("a", np.ubyte, 1)])
+c = np.array((255, 255, 255, 1), dtype=color)
+print(c)
 
 ```
 
@@ -190,56 +209,86 @@ np.nan - np.nan                   nan
 一个5x3的矩阵和一个3x2的矩阵相乘，结果是什么？
 
 ```python
-
+Z = np.dot(np.zeros((5, 3)), np.zeros((3, 2)))
+# 或者
+# Z = np.zeros((5, 3))@ np.zeros((3, 2))
+print (Z)
 ```
 
 #### 25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)
 给定一个一维数组把它索引从3到8的元素求相反数
 
 ```python
-
+Z = np.arange(11)
+Z[(3 <= Z) & (Z < 8)] *= -1
+print (Z)
 ```
 
 #### 26. What is the output of the following script? (★☆☆)
 下面的脚本的结果是什么？
 
 ```python
-
+# Author: Jake VanderPlas               # 结果
+ 
+print(sum(range(5),-1))                 9
+from numpy import *                     
+print(sum(range(5),-1))                 10    #numpy.sum(a, axis=None)
 ```
 
 #### 27. Consider an integer vector Z, which of these expressions are legal? (★☆☆)
 关于整形的向量Z下面哪些表达式正确？
 
 ```python
-
+Z**Z                        True
+2 << Z >> 2                 False
+Z <- Z                      True
+1j*Z                        True  #复数           
+Z/1/1                       True
+Z<Z>Z                       False
 ```
 
 #### 28. What are the result of the following expressions?
 下面表达式的结果分别是什么？
 
 ```python
-
+np.array(0) / np.array(0)                           nan
+np.array(0) // np.array(0)                          0
+np.array([np.nan]).astype(int).astype(float)        -2.14748365e+09
 ```
 
 #### 29. How to round away from zero a float array ? (★☆☆)
 如何从零位开始舍入浮点数组？ 
 
 ```python
-
+# Author: Charles R Harris
+ 
+Z = np.random.uniform(-10,+10,10)
+print (np.copysign(np.ceil(np.abs(Z)), Z))
 ```
 
 #### 30. How to find common values between two arrays? (★☆☆)
 如何找出两个数组公共的元素? 
 
 ```python
-
+Z1 = np.random.randint(0, 10, 10)
+Z2 = np.random.randint(0, 10, 10)
+print (np.intersect1d(Z1, Z2))
 ```
 
 #### 31. How to ignore all numpy warnings (not recommended)? (★☆☆)
 如何忽略numpy的警告信息（不推荐）?
 
 ```python
-
+# Suicide mode on
+defaults = np.seterr(all="ignore")
+Z = np.ones(1) / 0
+ 
+# Back to sanity
+_ = np.seterr(**defaults)
+ 
+# 另一个等价的方式， 使用上下文管理器（context manager）
+with np.errstate(divide='ignore'):
+    Z = np.ones(1) / 0
 ```
 
 An equivalent way, with a context manager:
@@ -252,28 +301,37 @@ An equivalent way, with a context manager:
 下面的表达式是否为真?
 
 ```python
-
+np.sqrt(-1) == np.emath.sqrt(-1)     False
 ```
 
 #### 33. How to get the dates of yesterday, today and tomorrow? (★☆☆)
  如何获得昨天，今天和明天的日期? 
 
 ```python
-
+yesterday = np.datetime64('today', 'D') - np.timedelta64(1, 'D')
+today = np.datetime64('today', 'D')
+tomorrow = np.datetime64('today', 'D') + np.timedelta64(1, 'D')
 ```
 
 #### 34. How to get all the dates corresponding to the month of July 2016? (★★☆)
 怎么获得所有与2016年7月的所有日期? 
 
 ```python
-
+Z = np.arange('2016-07', '2016-08', dtype='datetime64[D]')
+print (Z)
 ```
 
 #### 35. How to compute ((A+B)\*(-A/2)) in place (without copy)? (★★☆)
 
 
 ```python
-
+A = np.ones(3) * 1
+B = np.ones(3) * 1
+C = np.ones(3) * 1
+np.add(A, B, out=B)
+np.divide(A, 2, out=A)
+np.negative(A, out=A)
+np.multiply(A, B, out=A)
 ```
 
 #### 36. Extract the integer part of a random array using 5 different methods (★★☆)
