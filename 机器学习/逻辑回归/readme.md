@@ -1,5 +1,5 @@
 ## sklearn中的逻辑回归
-from sklearn.liner_model import LogisticRegression 
+from  sklearn.liner_model  import  LogisticRegression 
 
 #### 主要参数介绍:
 __penalty:__ 惩罚项,取值为l1或者l2,默认为l2,当模型满足高斯分布时(正太分布),使用l2,当模型参数满足拉普拉斯分布时,使用l1。
